@@ -1,0 +1,15 @@
+version: "1.0"
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    volumes:
+      - ./create_schema.sql:/docker-entrypoint-initdb.d/1-create_schema.sql
+      - ./create_customers.sql:/docker-entrypoint-initdb.d/2-create_customers.sql
+      - ./create_orders.sql:/docker-entrypoint-initdb.d/3-create_orders.sql
+      - ./insert_data.sql:/docker-entrypoint-initdb.d/4-insert_data.sql
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=postgres
